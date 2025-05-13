@@ -1,0 +1,5 @@
+        <form method="post" action="/comment/submit" id="submit-comment">
+                                       {% csrf_token %}
+                                       <textarea name="content" placeholder="نظر خود را وارد کنید ...!"></textarea>
+                                       <button id="submit-btn" type="submit">ثبت نظر</button>
+        </form>

@@ -1,0 +1,29 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/auth.css">
+    <title>LOGIN</title>
+</head>
+<body>
+     <div id="filter"></div>
+     <div class="loader"></div>
+     {% if messages %}
+             <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+             </ul>
+    {% endif %}
+     <section id="container">
+            {{ template }}
+            <section id="form-image">
+                       <img src="../static/Login-pana 1.png" alt="">
+            </section>
+     </section>
+
+<script src="../static/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'adminPanelStyles.css' %}">
+    <title>Admin</title>
+</head>
+<body>
+ <section id="navbar">
+      <a href="/adminPanel/createbook" class="action">
+             ایجاد کتاب
+      </a>
+      <a class="action" href="/adminPanel/createcategory">
+            ایجاد دسته بندی
+      </a>
+ </section>
+ <section id="container">
+       <form enctype="multipart/form-data" id="create-book" action="" method="post">
+            {% csrf_token %}
+            {{form}}
+            {% if form %}
+                 <input type="submit" value="ایجاد">
+            {% endif %}
+       </form>
+ </section>
+<script src="{% static 'adminPanelScripts.js' %}"></script>
+</body>
+</html>

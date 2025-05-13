@@ -1,0 +1,1550 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color : black ;
+}
+@font-face {
+    font-family:"morabba-bold";
+    src: url('Morabba-Bold.woff2');
+}
+@font-face {
+    font-family: "morabba-Light";
+    src: url('Morabba-Light.woff2');
+}
+@font-face {
+    font-family: "morabba-medium";
+    src: url('Morabba-Medium.woff2');
+}
+@font-face {
+    font-family:"dana-demibold" ;
+    src: url('DanaFaNum-DemiBold.woff2');
+}
+@font-face {
+    font-family: "dana-medium";
+    src: url('DanaFaNum-Medium.woff2');
+}
+@font-face {
+    font-family: "dana-regular";
+    src: url('DanaFaNum-Regular.woff2');
+}
+body{
+    height: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+}
+@media only screen and (min-width : 200px){
+#header {
+    width: 100%;
+    height: 770px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #FFF4E6;
+    border-radius: 0 0 30% 30% / 0 0 25% 25%;
+}
+#navbar{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    background-color: #FFF4E6;
+    padding: 10px 40px 0px 40px;
+    justify-content: space-between;
+    font-family: dana-demibold;
+    z-index: 40;
+}
+#nav-sec1 {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    height: 100%;
+    width: auto;
+}
+#nav-sec1 > svg {
+    display: none;
+}
+#nav-sec1 > #shoplist > img {
+    width: 23px;
+    height: 23px;
+}
+#nav-sec1 > #profile > img {
+    width: 23px;
+    height: 23px;
+}
+#nav-sec1-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap : 25px ;
+}
+#nav-links {
+    height: 90%;
+    width: 49%;
+    padding-top: 10px;
+    display:none;
+    gap : 8px ;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 17px;
+    font-family: dana-medium;
+    color: #4B2E1E;
+}
+#nav-links > a {
+    cursor: pointer;
+}
+#nav-logo {
+    height: 100%;
+    width: auto;
+    display: flex;
+    margin-top: -10px;
+    direction: ltr;
+    display: none;
+}
+#nav-logo > svg {
+    width: 60px;
+    height: 60px;
+}
+#sec-user-login {
+    width: 100px ;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #4B2E1E;
+    color : white ;
+    margin-top: -15px;
+}
+#menu-btn {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap : 7px ;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: 8px;
+}
+#menu-btn > #btn-line {
+    width: 30px ;
+    height: 3px;
+    background-color:#4B2E1E;
+    transition: all 0.4s ease-in;
+}
+.opened{
+    display: block;
+    position: relative;
+}
+.opened > .first{
+    transform: rotate(45deg) ;
+    position: absolute;
+}
+.opened > .second{
+     transform : rotate(-45deg);
+     position : absolute ;
+}
+.opened > .third{
+     opacity: 0;
+     visibility: hidden;
+}
+#side-bar {
+    width: 130px;
+    height: 250px;
+    position: absolute;
+    top : 80px ;
+    left : 40px ;
+    z-index: 40;
+    border: solid #4B2E1E 2px;
+    background-color: #FFF4E6;
+    border-radius: 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap : 30px ;
+    font-family: morabba-medium;
+}
+#side-bar > a {
+    text-decoration: none;
+    color : #4B2E1E ;
+    transition : all 0.3s ease ;
+}
+.filter {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255,0.6);
+    backdrop-filter: blur(2px);
+    z-index: 30;
+    transition:all 0.4s ease;
+    visibility: hidden;
+    opacity: 0;
+}
+.error{
+    position: absolute;
+    top: -20px;
+    right: -100px;
+    width: 170px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "morabba-medium";
+    font-size: 15px;
+    background-color: #FF7081;
+    border-radius: 8px;
+    padding: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in;
+    z-index: 2000;
+}
+.success{
+    position: absolute;
+    top: -20px;
+    right: -100px;
+    width: 170px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "morabba-medium";
+    font-size: 15px;
+    background-color: #3b7a3a;
+    border-radius: 8px;
+    color: white;
+    padding: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in;
+    z-index: 2000;
+}
+.success-active{
+    top: 20px;
+    right: 30px;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.4s ease-in;
+}
+.error-active{
+    top: 20px;
+    right: 30px;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.4s ease-in;
+}
+#container {
+    width: 100%;
+    height: 1900px;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+}
+.pageTitle {
+margin-top: 30px;
+font-family: 'dana-demibold';
+font-size: 24px;
+}
+#container > #itemsAndFactor {
+width: 100%;
+height: 50%;
+display: flex;
+flex-direction: column;
+gap: 30px;
+padding: 30px;
+justify-content: space-between;
+}
+#itemsAndFactor > #items {
+width: 100%;
+height: 50%;
+display: flex;
+flex-direction: column;
+gap : 30px ;
+overflow: scroll;
+scrollbar-width: none; /* For Firefox */
+-ms-overflow-style: none; /* For IE and Edge */
+}
+#items::-webkit-scrollbar {
+display: none ;
+}
+#items > .item {
+width: 100%;
+height: auto;
+background-color: #FBF7F2;
+border-radius: 12px;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 10px;
+position: relative;
+}
+.item > .remove {
+width: auto;
+height: auto;
+position: absolute;
+cursor: pointer;
+top: 8px;
+left: 8px;
+background-color: #FBF7F2;
+}
+.remove > svg {
+width: 20px;
+height: 20px;
+}
+.item > .image-container {
+width: 50%;
+height: 30%;
+}
+.item > .item-info {
+width: 100%;
+height: 70%;
+display: flex;
+flex-direction: column;
+margin: 7px 10px;
+padding: 10px;
+font-family: 'dana-demibold';
+font-size: 16px;
+}
+.item-info > .sumPrice-title {
+ font-size: 12px;
+ margin-top: 40px;
+}
+.item-info > p {
+    text-align: center;
+}
+.bookName{
+    font-size: 12px;
+}
+.authorAndDate {
+font-family: 'dana-regular';
+font-size: 10px;
+color: #707070;
+}
+.item-info > .sumPriceAndAmount {
+width: 100%;
+height: 40px;
+display: flex ;
+margin-top: 20px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 10px;
+}
+.sumPriceAndAmount > .price {
+color: #15752A;
+font-family: 'dana-regular';
+font-size: 13px;
+ margin-top: 15px;
+}
+.sumPriceAndAmount > .amountBtns {
+width: 90px;
+height: 100%;
+border-radius: 10px;
+display: flex;
+gap: 10px;
+font-family: 'dana-demibold';
+justify-content: center;
+align-items: center;
+color: #000000;
+box-shadow:-4px 4px 8px #00000014;
+background-color: white;
+}
+.amountBtns > div {
+cursor: pointer;
+}
+.image-container > img {
+width: 100%;
+height: 100%;
+border-radius: 12px;
+}
+#itemsAndFactor > #factor {
+width: 100%;
+height: 40%;
+display: flex;
+flex-direction: column;
+font-family: 'dana-medium';
+font-size: 16px;
+padding: 10px;
+border-radius: 10px;
+background-color: #FBF7F2;
+}
+#factor > .costs {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 30px;
+margin-bottom: 10px;
+font-size: 12px;
+}
+#factor > #goToPayment {
+width: 100px;
+height: 40px;
+color : rgb(215, 215, 215) ;
+background-color: #4B2E1E;
+border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'dana-medium';
+cursor: pointer;
+font-size: 10px;
+margin: auto;
+}
+#container > #deliveryInfo {
+width: 90%;
+height: 40%;
+background-color: #FBF7F2;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 8px;
+margin: auto;
+border-radius: 10px;
+}
+#deliveryInfo label{
+font-size: 15px;
+font-family: 'dana-demibold';
+margin-top: 30px;
+margin-bottom: 10px;
+}
+.inputAndSvg{
+width: 90%;
+height: 50px;
+padding: 0 20px;
+border-radius: 10px;
+background-color:white;
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+.inputAndSvg > input {
+width: 80%;
+height: 100%;
+padding-right: 10px;
+font-family: 'dana-regular';
+font-size: 14px;
+}
+.txtarea{
+width: 90%;
+height: 180px;
+padding: 0;
+padding: 10px;
+font-family: 'dana-medium';
+font-size: 14px;
+border-radius: 10px;
+}
+.inputAndSvg > svg {
+width: 30px;
+height: 30px;
+}
+}
+@media only screen and (min-width : 400px){
+#header {
+    width: 100%;
+    height: 850px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #FFF4E6;
+    border-radius: 0 0 30% 30% / 0 0 25% 25%;
+}
+#navbar{
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: 20px 40px 0px 40px;
+    justify-content: space-between;
+    font-family: dana-demibold;
+    z-index: 40;
+}
+#nav-sec1 {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    height: 100%;
+    width: auto;
+}
+#nav-sec1 > svg {
+    display: none;
+}
+#nav-sec1-2{
+    gap : 35px ;
+}
+#nav-links {
+    height: 90%;
+    width: 49%;
+    padding-top: 10px;
+    display:none;
+    gap : 8px ;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 15px;
+    font-family: dana-medium;
+    color: #4B2E1E;
+}
+#nav-links > a {
+    cursor: pointer;
+}
+#nav-logo {
+    height: 100%;
+    width: auto;
+    direction: ltr;
+    display: block;
+    margin-right: -40px;
+}
+#nav-logo > svg {
+    width: 60px;
+    height: 60px;
+}
+#sec-user-login {
+    margin-top: 0;
+    width: 100px ;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #4B2E1E;
+    color : white ;
+}
+#menu-btn {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap : 7px ;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: 8px;
+}
+#menu-btn > #btn-line {
+    width: 30px ;
+    height: 3px;
+    background-color:#4B2E1E;
+    transition: all 0.4s ease-in;
+}
+.opened{
+    display: block;
+    position: relative;
+}
+.opened > .first{
+    transform: rotate(45deg) ;
+    position: absolute;
+}
+.opened > .second{
+     transform : rotate(-45deg);
+     position : absolute ;
+}
+.opened > .third{
+     opacity: 0;
+     visibility: hidden;
+}
+#side-bar {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top : 100px ;
+    left : 40px ;
+    z-index: 40;
+    border: solid #4B2E1E 2px;
+    background-color: #FFF4E6;
+    border-radius: 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap : 30px ;
+    font-family: morabba-medium;
+}
+#side-bar > a {
+    text-decoration: none;
+    color : #4B2E1E ;
+    transition : all 0.3s ease ;
+}
+.error{
+    position: absolute;
+    top: -20px;
+    right: -100px;
+    width: 300px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "morabba-medium";
+    font-size: 15px;
+    background-color: #FF7081;
+    border-radius: 8px;
+    padding: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in;
+}
+.success{
+    position: absolute;
+    top: -20px;
+    right: -100px;
+    width: 300px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "morabba-medium";
+    font-size: 15px;
+    background-color: #3b7a3a;
+    border-radius: 8px;
+    color: white;
+    padding: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in;
+    z-index: 2000;
+}
+.success-active{
+    top: 20px;
+    right: 100px;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.4s ease-in;
+}
+.error-active{
+    top: 20px;
+    right: 100px;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.4s ease-in;
+}
+#container {
+    width: 95%;
+    height: 1900px;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+}
+.pageTitle {
+margin-top: 30px;
+font-family: 'dana-demibold';
+font-size: 24px;
+}
+#container > #itemsAndFactor {
+width: 100%;
+height: 50%;
+display: flex;
+flex-direction: column;
+gap: 30px;
+padding: 30px;
+justify-content: space-between;
+}
+#itemsAndFactor > #items {
+width: 100%;
+height: 50%;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap : 30px ;
+overflow: scroll;
+scrollbar-width: none; /* For Firefox */
+-ms-overflow-style: none; /* For IE and Edge */
+}
+#items::-webkit-scrollbar {
+display: none ;
+}
+#items > .item {
+width: 75%;
+height: auto;
+background-color: #FBF7F2;
+border-radius: 12px;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 10px;
+position: relative;
+}
+.item > .remove {
+width: auto;
+height: auto;
+position: absolute;
+cursor: pointer;
+top: 10px;
+left: 15px;
+background-color: #FBF7F2;
+}
+.remove > svg {
+width: 30px;
+height: 30px;
+}
+.item > .image-container {
+width: 50%;
+height: 40%;
+}
+.item > .item-info {
+width: 100%;
+height: 60%;
+display: flex;
+flex-direction: column;
+margin: 7px 10px;
+padding: 10px;
+font-family: 'dana-demibold';
+font-size: 16px;
+}
+.item-info > .sumPrice-title {
+ font-size: 12px;
+ margin-top: 40px;
+}
+.item-info > p {
+    text-align: center;
+}
+.bookName{
+    font-size: 16px;
+}
+.authorAndDate {
+font-family: 'dana-regular';
+font-size: 12px;
+color: #707070;
+}
+.item-info > .sumPriceAndAmount {
+width: 100%;
+height: 40px;
+display: flex ;
+margin-top: 20px;
+flex-direction: row;
+justify-content: space-between;
+}
+.sumPriceAndAmount > .price {
+color: #15752A;
+font-family: 'dana-regular';
+font-size: 13px;
+ margin-top: 15px;
+}
+.sumPriceAndAmount > .amountBtns {
+width: 90px;
+height: 100%;
+border-radius: 10px;
+display: flex;
+gap: 10px;
+font-family: 'dana-demibold';
+justify-content: center;
+align-items: center;
+color: #000000;
+box-shadow:-4px 4px 8px #00000014;
+background-color: white;
+}
+.amountBtns > div {
+cursor: pointer;
+}
+.image-container > img {
+width: 100%;
+height: 100%;
+border-radius: 12px;
+}
+#itemsAndFactor > #factor {
+width: 100%;
+height: 50%;
+display: flex;
+flex-direction: column;
+font-family: 'dana-medium';
+font-size: 16px;
+padding: 30px;
+border-radius: 10px;
+background-color: #FBF7F2;
+}
+#factor > .costs {
+display: flex;
+flex-direction: row;
+gap: 8px;
+align-items: stretch;
+justify-content: space-between;
+margin-top: 30px;
+margin-bottom: 30px;
+font-size: 15px;
+}
+#factor > #goToPayment {
+width: 200px;
+height: 60px;
+color : rgb(215, 215, 215) ;
+background-color: #4B2E1E;
+border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'dana-medium';
+cursor: pointer;
+font-size: 15px;
+margin: auto;
+}
+#container > #deliveryInfo {
+width: 90%;
+height: 40%;
+margin-top: 20px;
+background-color: #FBF7F2;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 20px;
+margin-right: 30px;
+border-radius: 10px;
+}
+#deliveryInfo label{
+font-size: 15px;
+font-family: 'dana-demibold';
+margin-top: 30px;
+margin-bottom: 10px;
+}
+.inputAndSvg{
+width: 90%;
+height: 50px;
+padding: 0 20px;
+border-radius: 10px;
+background-color:white;
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+.inputAndSvg > input {
+width: 80%;
+height: 100%;
+padding-right: 10px;
+font-family: 'dana-regular';
+font-size: 14px;
+}
+.txtarea{
+width: 90%;
+height: 180px;
+padding: 0;
+padding: 10px;
+font-family: 'dana-medium';
+font-size: 14px;
+border-radius: 10px;
+}
+.inputAndSvg > svg {
+width: 30px;
+height: 30px;
+}
+}
+@media only screen and (min-width : 550px){
+#container {
+            width: 95%;
+            height: 1900px;
+            margin-top: 150px;
+            display: flex;
+            flex-direction: column;
+}
+.pageTitle {
+        margin-top: 30px;
+        font-family: 'dana-demibold';
+        font-size: 24px;
+}
+#container > #itemsAndFactor {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px;
+        justify-content: space-between;
+}
+#itemsAndFactor > #items {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        gap : 30px ;
+        overflow: scroll;
+        scrollbar-width: none; /* For Firefox */
+        -ms-overflow-style: none; /* For IE and Edge */
+}
+#items::-webkit-scrollbar {
+        display: none ;
+}
+#items > .item {
+        width: 100%;
+        height: 219px;
+        background-color: #FBF7F2;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        position: relative;
+}
+.item > .remove {
+        width: auto;
+        height: auto;
+        position: absolute;
+        cursor: pointer;
+        top: 20px;
+        left: 30px;
+        background-color: #FBF7F2;
+}
+.remove > svg {
+        width: 30px;
+        height: 30px;
+}
+.item > .image-container {
+        width: 40%;
+        height: 90%;
+}
+.item > .item-info {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 7px 10px;
+        padding: 10px;
+        font-family: 'dana-demibold';
+        font-size: 16px;
+}
+.item-info > p {
+    text-align: start;
+}
+.item-info > .sumPrice-title {
+         font-size: 12px;
+         margin-top: 40px;
+}
+.authorAndDate {
+        font-family: 'dana-regular';
+        font-size: 12px;
+        color: #707070;
+}
+.item-info > .sumPriceAndAmount {
+        width: 100%;
+        height: 40px;
+        display: flex ;
+        margin-top: 20px;
+        flex-direction: row;
+        justify-content: space-between;
+}
+.sumPriceAndAmount > .price {
+        color: #15752A;
+        font-family: 'dana-regular';
+        font-size: 13px;
+         margin-top: 15px;
+}
+.sumPriceAndAmount > .amountBtns {
+        width: 120px;
+        height: 100%;
+        border-radius: 10px;
+        display: flex;
+        gap: 10px;
+        font-family: 'dana-demibold';
+        justify-content: center;
+        align-items: center;
+        color: #000000;
+        box-shadow:-4px 4px 8px #00000014;
+        background-color: white;
+}
+.amountBtns > div {
+        cursor: pointer;
+}
+.image-container > img {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+}
+#itemsAndFactor > #factor {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        font-family: 'dana-medium';
+        font-size: 16px;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #FBF7F2;
+}
+#factor > .costs {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 15px;
+}
+#factor > #goToPayment {
+        width: 200px;
+        height: 60px;
+        color : rgb(215, 215, 215) ;
+        background-color: #4B2E1E;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'dana-medium';
+        cursor: pointer;
+        font-size: 15px;
+        margin: auto;
+}
+#container > #deliveryInfo {
+        width: 90%;
+        height: 40%;
+        margin-top: 20px;
+        background-color: #FBF7F2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-right: 30px;
+        border-radius: 10px;
+}
+#deliveryInfo label{
+        font-size: 15px;
+        font-family: 'dana-demibold';
+        margin-top: 30px;
+        margin-bottom: 10px;
+}
+.inputAndSvg{
+        width: 90%;
+        height: 50px;
+        padding: 0 20px;
+        border-radius: 10px;
+        background-color:white;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+}
+.inputAndSvg > input {
+        width: 80%;
+        height: 100%;
+        padding-right: 10px;
+        font-family: 'dana-regular';
+        font-size: 14px;
+}
+.txtarea{
+        width: 90%;
+        height: 180px;
+        padding: 0;
+        padding: 10px;
+        font-family: 'dana-medium';
+        font-size: 14px;
+        border-radius: 10px;
+}
+.inputAndSvg > svg {
+        width: 30px;
+        height: 30px;
+}
+}
+@media only screen and (min-width : 800px){
+#header {
+        width: 100%;
+        height: 760px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background-color: #FFF4E6;
+        border-radius: 0 0 30% 30% / 0 0 25% 25%;
+}
+#navbar{
+        width: 100%;
+        height: auto;
+        display: flex;
+        padding: 10px 40px 0px 40px;
+        justify-content: space-between;
+        font-family: dana-demibold;
+}
+#nav-sec1 {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        height: 100%;
+        width: auto;
+}
+#nav-sec1 > svg {
+        display: block;
+}
+#nav-links {
+        height: 90%;
+        width: 49%;
+        padding-top: 10px;
+        display: flex;
+        gap : 8px ;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 17px;
+        font-family: dana-medium;
+        color: #4B2E1E;
+}
+ #nav-links > a {
+        cursor: pointer;
+}
+#nav-logo {
+        height: 100%;
+        width: auto;
+        direction: ltr;
+        margin-left: 0;
+        margin-right: -40px;
+}
+#nav-logo > svg {
+        width: 60px;
+        height: 60px;
+}
+#sec-user-login {
+        width: 100px ;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 11px;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: #4B2E1E;
+        color : white ;
+}
+#menu-btn {
+        display: none;
+}
+#container {
+width: 95%;
+height: 1300px;
+margin-top: 150px;
+display: flex;
+flex-direction: column;
+}
+.pageTitle {
+margin-top: 30px;
+font-family: 'dana-demibold';
+font-size: 24px;
+}
+#container > #itemsAndFactor {
+width: 100%;
+height: 50%;
+display: flex;
+flex-direction: row;
+padding: 30px;
+justify-content: space-between;
+}
+#itemsAndFactor > #items {
+width: 55%;
+height: 100%;
+display: flex;
+flex-direction: column;
+gap : 30px ;
+overflow: scroll;
+scrollbar-width: none; /* For Firefox */
+-ms-overflow-style: none; /* For IE and Edge */
+}
+#items::-webkit-scrollbar {
+display: none ;
+}
+#items > .item {
+width: 100%;
+height: 219px;
+background-color: #FBF7F2;
+border-radius: 12px;
+display: flex;
+align-items: center;
+padding: 10px;
+position: relative;
+}
+.item > .remove {
+width: auto;
+height: auto;
+position: absolute;
+cursor: pointer;
+top: 20px;
+left: 30px;
+background-color: #FBF7F2;
+}
+.remove > svg {
+width: 30px;
+height: 30px;
+}
+.item > .image-container {
+width: 40%;
+height: 90%;
+}
+.item > .item-info {
+width: 80%;
+height: 100%;
+display: flex;
+flex-direction: column;
+margin: 7px 10px;
+padding: 10px;
+font-family: 'dana-demibold';
+font-size: 16px;
+}
+.item-info > .sumPrice-title {
+ font-size: 12px;
+ margin-top: 40px;
+}
+.authorAndDate {
+font-family: 'dana-regular';
+font-size: 12px;
+color: #707070;
+}
+.item-info > .sumPriceAndAmount {
+width: 100%;
+height: 40px;
+display: flex ;
+margin-top: 20px;
+flex-direction: row;
+justify-content: space-between;
+}
+.sumPriceAndAmount > .price {
+color: #15752A;
+font-family: 'dana-regular';
+font-size: 13px;
+ margin-top: 15px;
+}
+.sumPriceAndAmount > .amountBtns {
+width: 120px;
+height: 100%;
+border-radius: 10px;
+display: flex;
+gap: 10px;
+font-family: 'dana-demibold';
+justify-content: center;
+align-items: center;
+color: #000000;
+box-shadow:-4px 4px 8px #00000014;
+background-color: white;
+}
+.amountBtns > div {
+cursor: pointer;
+}
+.image-container > img {
+width: 100%;
+height: 100%;
+border-radius: 12px;
+}
+#itemsAndFactor > #factor {
+width: 43%;
+height: 75%;
+display: flex;
+flex-direction: column;
+font-family: 'dana-medium';
+font-size: 16px;
+padding: 30px;
+border-radius: 10px;
+background-color: #FBF7F2;
+}
+#factor > .costs {
+display: flex;
+justify-content: space-between;
+margin-top: 30px;
+margin-bottom: 30px;
+font-size: 15px;
+}
+#factor > #goToPayment {
+width: 200px;
+height: 60px;
+color : rgb(215, 215, 215) ;
+background-color: #4B2E1E;
+border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'dana-medium';
+cursor: pointer;
+font-size: 15px;
+margin: auto;
+}
+#container > #deliveryInfo {
+width: 53%;
+height: 40%;
+margin-top: 20px;
+background-color: #FBF7F2;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 20px;
+margin-right: 30px;
+border-radius: 10px;
+}
+#deliveryInfo label{
+font-size: 15px;
+font-family: 'dana-demibold';
+margin-top: 30px;
+margin-bottom: 10px;
+}
+.inputAndSvg{
+width: 90%;
+height: 50px;
+padding: 0 20px;
+border-radius: 10px;
+background-color:white;
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+.inputAndSvg > input {
+width: 80%;
+height: 100%;
+padding-right: 10px;
+font-family: 'dana-regular';
+font-size: 14px;
+}
+.txtarea{
+width: 90%;
+height: 180px;
+padding: 0;
+padding: 10px;
+font-family: 'dana-medium';
+font-size: 14px;
+border-radius: 10px;
+}
+.inputAndSvg > svg {
+width: 30px;
+height: 30px;
+}
+}
+@media only screen and (min-width : 1100px){
+#header {
+        width: 100%;
+        height:750px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background-color: #FFF4E6;
+        border-radius: 0 0 30% 30% / 0 0 25% 25%;
+}
+#navbar{
+        width: 100%;
+        height: auto;
+        display: flex;
+        padding: 10px 40px 0px 40px;
+        justify-content: space-between;
+        font-family: dana-demibold;
+}
+#nav-sec1 {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        height: 100%;
+        width: 15%;
+}
+#nav-sec1 > svg {
+        display: block;
+}
+#nav-links {
+        height: 90%;
+        width: 35%;
+        padding-top: 10px;
+        display: flex;
+        gap : 8px ;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 17px;
+        font-family: dana-medium;
+        color: #4B2E1E;
+}
+#nav-links > a {
+        cursor: pointer;
+}
+#nav-logo {
+        height: 100%;
+        width: 10%;
+        direction: ltr;
+        margin-left: 0;
+}
+#nav-logo > svg {
+        width: 60px;
+        height: 60px;
+}
+#container {
+    width: 95%;
+    height: 1300px;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+}
+.pageTitle {
+    margin-top: 30px;
+    font-family: 'dana-demibold';
+    font-size: 24px;
+}
+#container > #itemsAndFactor {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    padding: 30px;
+    justify-content: space-between;
+}
+#itemsAndFactor > #items {
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap : 30px ;
+    overflow: scroll;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For IE and Edge */
+}
+#items::-webkit-scrollbar {
+    display: none ;
+}
+#items > .item {
+    width: 100%;
+    height: 219px;
+    background-color: #FBF7F2;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+}
+.item > .remove {
+    width: auto;
+    height: auto;
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    left: 30px;
+    background-color: #FBF7F2;
+}
+.remove > svg {
+    width: 30px;
+    height: 30px;
+}
+.item > .image-container {
+    width: 35%;
+    height: 90%;
+}
+.item > .item-info {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 7px 10px;
+    padding: 10px;
+    font-family: 'dana-demibold';
+    font-size: 16px;
+}
+.item-info > .sumPrice-title {
+     font-size: 12px;
+     margin-top: 40px;
+}
+.authorAndDate {
+    font-family: 'dana-regular';
+    font-size: 12px;
+    color: #707070;
+}
+.item-info > .sumPriceAndAmount {
+    width: 100%;
+    height: 40px;
+    display: flex ;
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.sumPriceAndAmount > .price {
+    color: #15752A;
+    font-family: 'dana-regular';
+    font-size: 13px;
+     margin-top: 5px;
+}
+.sumPriceAndAmount > .amountBtns {
+    width: 120px;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    font-family: 'dana-demibold';
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    box-shadow:-4px 4px 8px #00000014;
+    background-color: white;
+}
+.amountBtns > div {
+    cursor: pointer;
+}
+.image-container > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+#itemsAndFactor > #factor {
+    width: 43%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'dana-medium';
+    font-size: 16px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #FBF7F2;
+}
+#factor > .costs {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+#factor > #goToPayment {
+    width: 200px;
+    height: 60px;
+    color : rgb(215, 215, 215) ;
+    background-color: #4B2E1E;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'dana-medium';
+    cursor: pointer;
+    font-size: 15px;
+    margin: auto;
+}
+#container > #deliveryInfo {
+    width: 53%;
+    height: 40%;
+    margin-top: 20px;
+    background-color: #FBF7F2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-right: 30px;
+    border-radius: 10px;
+}
+#deliveryInfo label{
+    font-size: 15px;
+    font-family: 'dana-demibold';
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.inputAndSvg{
+    width: 90%;
+    height: 50px;
+    padding: 0 20px;
+    border-radius: 10px;
+    background-color:white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.inputAndSvg > input {
+    width: 80%;
+    height: 100%;
+    padding-right: 10px;
+    font-family: 'dana-regular';
+    font-size: 14px;
+}
+.txtarea{
+    width: 90%;
+    height: 180px;
+    padding: 0;
+    padding: 10px;
+    font-family: 'dana-medium';
+    font-size: 14px;
+    border-radius: 10px;
+}
+.inputAndSvg > svg {
+    width: 30px;
+    height: 30px;
+}
+}

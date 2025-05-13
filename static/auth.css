@@ -1,0 +1,202 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none ;
+}
+@font-face {
+    font-family:"morabba-bold";
+    src: url('/static/Morabba-Bold.woff2');
+}
+@font-face {
+    font-family: "morabba-Light";
+    src: url('/static/Morabba-Light.woff2');
+}
+@font-face {
+    font-family: "morabba-medium";
+    src: url('/static/Morabba-Medium.woff2');
+}
+@font-face {
+    font-family:"dana-demibold" ;
+    src: url('/static/DanaFaNum-DemiBold.woff2');
+}
+@font-face {
+    font-family: "dana-medium";
+    src: url('/static/DanaFaNum-Medium.woff2');
+}
+@font-face {
+    font-family: "dana-regular";
+    src: url('/static/DanaFaNum-Regular.woff2');
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+#container{
+    width: 95vw;
+    height: 95vh;
+    background-color: #FFF4E6;
+    margin : auto ;
+    display: flex;
+}
+#container > #form-image {
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+#container > #form-container {
+    width: 50%;
+    height: 100%;
+    display : flex ;
+    flex-direction: column;
+    padding-right: 40px;
+    padding-top: 40px;
+}
+#form-container > #purposeOfThisForm {
+    margin:auto ;
+    color: #4B2E1E;
+    font-family: "morabba-bold";
+    font-size: 20px;
+}
+#form-container > form {
+    width: 70%;
+    height: 450px;
+    margin-top : 20px ;
+    display: flex;
+    flex-direction: column;
+    padding : 40px 0px ;
+}
+#form-container > .form-register {
+    height: 520px;
+    margin-top : 0px ;
+}
+#form-container > #registerFormNavigator {
+    font-family: "morabba-medium";
+    font-size : 17px ;
+}
+#form-container > #registerFormNavigator > a {
+    font-family: "morabba-medium";
+    font-size : 16px ;
+    color : #4B2E1E ;
+}
+label{
+    font-family: "dana-regular";
+    font-size: 16px;
+    position: inherit;
+}
+.input-container {
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+}
+.input-container > svg {
+    width: 33px;
+    height: 33px;
+}
+.input-container > input {
+    height: 100%;
+    width: 100%;
+    font-family : 'morabba-medium' , 'times new roman';
+    padding : 8px ;
+}
+input[type=number]::-webkit-inner-spin-button , input[type=numer]::-webkit-outer-spin-button{
+    display: none;
+}
+#retrievePassword {
+    width: 100%;
+    height: auto;
+    direction: ltr;
+    font-family: "dana-medium" !important;
+    font-size: 13px;
+    color : rgb(51, 51, 51) ;
+    padding-left: 13px;
+}
+#retrievePassword > a {
+    color:#4B2E1E ;
+}
+.submit-btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    color : white ;
+    font-family : "dana-regular" ;
+    font-size : 20px ;
+    margin-top : 30px ;
+    background-color: #4B2E1E;
+}
+.login-with-social-media{
+    width: 80%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    gap : 5px ;
+    color : gray ;
+}
+.login-with-social-media > p {
+    font-family: "dana-medium";
+    font-size: 14px;
+}
+.line {
+    display: inline-block;
+    width: 30%;
+    height: 1px;
+    background-color: gray;
+}
+#social-medias {
+    width: 70%;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap : 30px ;
+}
+#social-medias > a {
+    width: 48%;
+    height: 60px;
+    border :1px solid #4B2E1E ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap : 10px ;
+    font-size: 20px;
+    border-radius: 7px;
+    color : #2E2E2E ;
+}
+.error {
+    position: absolute;
+    top : -20px ;
+    left: -100px;
+    width: 250px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "morabba-medium";
+    font-size: 15px;
+    background-color: #FF7081;
+    border-radius: 8px;
+    padding : 20px ;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-in;
+}
+
+.error-active {
+    top : 20px ;
+    left: 100px;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.4s ease-in;
+}

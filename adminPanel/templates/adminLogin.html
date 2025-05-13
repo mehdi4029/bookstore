@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="{% static 'adminLogin.styles.css' %}">
+</head>
+<body>
+      {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+      {% endif %}
+      <form method="post" action="">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="نام کاربری">
+            <input type="text" name="password" placeholder="پسوورد">
+            <button type="submit">login</button>
+      </form>
+</body>
+</html>

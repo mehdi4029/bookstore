@@ -1,0 +1,105 @@
+*{
+    padding: 0;
+    margin : 0 ;
+    outline : none ;
+    border : none ;
+    box-sizing : border-box ;
+    text-decoration: none;
+}
+@font-face {
+    font-family:"morabba-bold";
+    src: url('/static/Morabba-Bold.woff2');
+}
+@font-face {
+    font-family: "morabba-Light";
+    src: url('/static/Morabba-Light.woff2');
+}
+@font-face {
+    font-family: "morabba-medium";
+    src: url('/static/Morabba-Medium.woff2');
+}
+@font-face {
+    font-family:"dana-demibold" ;
+    src: url('/static/DanaFaNum-DemiBold.woff2');
+}
+@font-face {
+    font-family: "dana-medium";
+    src: url('/static/DanaFaNum-Medium.woff2');
+}
+@font-face {
+    font-family: "dana-regular";
+    src: url('/static/DanaFaNum-Regular.woff2');
+}
+body{
+    padding: 0px 0px 40px 0px;
+}
+#navbar{
+    width: 100%;
+    height: 70px;
+    background-color: #4B2E1E;
+    padding: 0px 20px ;
+    display: flex;
+}
+#navbar > .action {
+    height: 100%;
+    width: 120px;
+    border-right: 2px solid rgba(255,255,255,0.2) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color : white ;
+    font-family: "dana-regular";
+    font-size: 14px;
+    cursor: pointer;
+}
+#container {
+    width: 100%;
+    height: auto;
+    margin-top: 150px;
+    overflow: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#container::-webkit-scrollbar {
+    display: none;
+}
+#container > form#create-book {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+#create-book > div > label {
+    font-family: "dana-demibold";
+    font-size : 17px ;
+    direction: rtl;
+    display: block;
+}
+#create-book > div > input,textarea,select {
+    border: 1px solid #4B2E1E;
+    border-radius: 5px;
+    font-family: "morabba-bold";
+    direction: rtl;
+}
+#create-book > textarea,select {
+    padding: 10px 20px ;
+}
+#create-book > div > input{
+     width: 300px;
+     height: 40px;
+     padding: 10px 20px;
+}
+#create-book > div > select {
+    width: 350px;
+    height: 70px;
+}
+#create-book > input[type='submit']{
+    width: 100px;
+    height: 30px;
+    font-family:'morabba-bold';
+    border: 1px solid #4B2E1E;
+    border-radius: 5px;
+    background-color: white;
+}
