@@ -10,9 +10,22 @@ const searchInput = document.getElementById('searchInput')
 let searchResult = document.getElementById('result')
 let popUpErrorMessage = document.getElementsByClassName('error')[0]
 let popUpSuccessMessage = document.getElementsByClassName('success')[0]
+let viewCategoriesBtn = document.getElementById('view-categories')
+let categoriesBox = document.getElementById('categoriesContainer')
 let temp ; let key ; let value ; let fragment
 addToCartBook = [...addToCartBook]
 temp = [...filtersContainer.children]
+
+
+// smooth scroll
+viewCategoriesBtn.addEventListener('click' , e =>{
+    console.log('hello')
+    categoriesBox.scrollIntoView({
+        behavior : "smooth" ,
+        block : 'center'
+    })
+})
+
 
 
 function createFiltersFragment(data) {
@@ -132,7 +145,7 @@ if(popUpErrorMessage !== undefined) {
      popUpErrorMessage.classList.add('error-active')
 setTimeout(()=>{
       popUpErrorMessage.classList.remove('error-active')
-},2000);
+},6000);
 }
 
 // displaying success message that django embeded in cookies
@@ -140,5 +153,5 @@ if(popUpSuccessMessage !== undefined) {
      popUpSuccessMessage.classList.add('success-active')
 setTimeout(()=>{
       popUpSuccessMessage.classList.remove('success-active')
-},2000);
+},6000);
 }

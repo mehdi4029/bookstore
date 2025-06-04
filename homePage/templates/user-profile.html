@@ -22,18 +22,16 @@
         <!-- header -->
         <div class="filter"></div>
         <section id="side-bar">
-                <a href="">خانه</a>
-                <a href="">درباره ما</a>
-                <a href="">سبد خرید</a>
-                <a href="">دسته بندی ها</a>
+                <a href="/">خانه</a>
+                <a href=/about-us"">درباره ما</a>
+                <a href="/cart">سبد خرید</a>
         </section>
         <section id="navbar">
         {{ nav }}
         <section id="nav-links">
-                <a style="border-bottom: 1px solid #4B2E1E">خانه</a>
-                <a>دسته بندی ها</a>
-                <a>کتاب های من</a>
-                <a>درباره ما</a>
+                <a href="/">خانه</a>
+                <a href="/profile?scroll=end">کتاب های من</a>
+                <a href="/about-us">درباره ما</a>
         </section>
         <section id="nav-logo">
                         <svg width="145" height="134" viewBox="0 0 145 134" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -56,6 +54,14 @@
         </section>
 
     <section id="container">
+
+       <!-- user log out -->
+       <a href="/profile/logout" class="logout">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+                </svg>
+                <p>خروج از حساب کاربری</p>
+       </a>
 
         <!-- user account informations -->
         <label class="title-label" for="acc-info">اطلاعات حساب کاربری</label> 

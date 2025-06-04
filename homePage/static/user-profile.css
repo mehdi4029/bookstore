@@ -329,6 +329,21 @@ body{
         opacity: 1;
         transition: all 0.4s ease-in;
 }
+.logout {
+    width: 160px;
+    height: 40px;
+    font-family: "morabba-bold";
+    font-size : 13px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 80px;
+}
+.logout > svg {
+    width: 40px;
+    height: 40px;
+}
 .title-label {
     font-family: 'dana-demibold';
     font-size: 17px;

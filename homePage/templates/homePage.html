@@ -1,8 +1,10 @@
 {% load static %}
 <!DOCTYPE html>
+
 <html lang="en" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
     <link rel="stylesheet" href="{% static 'homePage.css' %}">
 </head>
@@ -23,18 +25,16 @@
   <section id="header">
          <!-- side bar will be shown for under 800px devices -->
          <section id="side-bar">
-                <a href="">خانه</a>
+                <a href="/">خانه</a>
                 <a href="/about-us">درباره ما</a>
-                <a href="">سبد خرید</a>
-                <a href="">دسته بندی ها</a>
+                <a href="/cart">سبد خرید</a>
          </section>
          <!-- navigation bar -->
          <section id="navbar">
              {{ nav }}
              <section id="nav-links">
-                    <a style="border-bottom: 1px solid #4B2E1E">خانه</a>
-                    <a>دسته بندی ها</a>
-                    <a>کتاب های من</a>
+                    <a href="/" style="border-bottom: 1px solid #4B2E1E">خانه</a>
+                    <a href="/profile?scroll=end">کتاب های من</a>
                     <a href="/about-us">درباره ما</a>
              </section>
              <section id="nav-logo">
@@ -139,8 +139,8 @@
    <section id="footer">
         <!-- about us , terms and contact us box -->
                <section>
-                         <a href="">تماس با ما</a>
-                         <a href="">درباره ما</a>
+                         <a href="/about-us">تماس با ما</a>
+                         <a href="/about-us">درباره ما</a>
                          <a href="">قوانین و مقررات</a>
                </section>
         <!-- logo and links for media -->

@@ -4,7 +4,21 @@ const popUpSuccessMessage = document.getElementsByClassName('success')[0]
 let phoneNumberContainer = document.getElementById('mobile-phone')
 const bar = document.getElementById('side-bar')
 const bodyFilter = document.getElementsByClassName('filter')[0]
+let booksContainer = document.getElementById('BooksContainer')
 let showMenuFlag = 0 ;
+let searchParam = new URLSearchParams(window.location.search)
+
+// Wait until everything is loaded
+window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(()=>{
+        if(searchParam.get('scroll') === 'end') {
+            booksContainer.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            })
+        }
+    },500)
+});
 
 
 function firstZeroChecker(e){
@@ -15,6 +29,8 @@ function firstZeroChecker(e){
 }
 
 
+
+
 try {phoneNumberContainer.lastElementChild.addEventListener('input' , firstZeroChecker)} catch{}
 
 
@@ -23,7 +39,7 @@ if(popUpErrorMessage !== undefined) {
      popUpErrorMessage.classList.add('error-active')
 setTimeout(()=>{
       popUpErrorMessage.classList.remove('error-active')
-},2000);
+},6000);
 }
 
 // displaying success message that django embeded in cookies
@@ -31,7 +47,7 @@ if(popUpSuccessMessage !== undefined) {
      popUpSuccessMessage.classList.add('success-active')
 setTimeout(()=>{
       popUpSuccessMessage.classList.remove('success-active')
-},2000);
+},6000);
 }
 
 

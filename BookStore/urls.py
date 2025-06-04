@@ -20,6 +20,7 @@ from BookStore import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('adminPanel/', include('adminPanel.urls')),
     path('' , include('homePage.urls')),
     path('auth/' , include('login_Register.urls')),

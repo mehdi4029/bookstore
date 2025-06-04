@@ -4,7 +4,8 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render,redirect
 from django.template.loader import render_to_string
 from rest_framework.parsers import JSONParser
-
+from django.http import HttpResponseRedirect
+from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
 from homePage.models import *
 from django.core.exceptions import ValidationError
 from urllib.parse import urlparse
@@ -26,6 +27,7 @@ def create_thousand_separator(price) :
         start -= 3
         end -= 3
     return price[0:end + 1] + finalStr + '  تومان'
+
 
 def checkIfUserIsAuthenticated(REQUEST) :
     if REQUEST.COOKIES.get('refresh') or REQUEST.COOKIES.get('sessionid') :
@@ -158,7 +160,7 @@ def bookView(request,bookID) :
 
     relatedBooks = list(set(relatedBooks[0:4]))
     comments = Comment.objects.filter(relatedBook=book)
-    return render(request, 'book.html', {'book': book ,'commentFragment' : fragment,'comments' : comments , 'nav' : nav , 'relatedBooks' : relatedBooks })
+    return render(request, 'Book.html', {'book': book ,'commentFragment' : fragment,'comments' : comments , 'nav' : nav , 'relatedBooks' : relatedBooks })
 
 
 
@@ -277,6 +279,7 @@ def category_view(request,catID) :
     return render(request,'Category.html',{'books' : books , 'nav' : nav , 'category' : category  , 'step' : step , 'filter' : filter , 'backPage' : backPage })
 
 def profile_view(request):
+  try :
     token = request.COOKIES.get('refresh')
     sessionID = request.COOKIES.get('sessionid')
 
@@ -294,6 +297,38 @@ def profile_view(request):
     favBooks = user.favBooks.all()
 
     return render(request , 'user-profile.html' , {'nav' : nav , 'favBooks' : favBooks , 'user' : user})
+
+  except Exception as e :
+    messages.error(request, 'لطفا ابتدا ثبت نام خود را مجددا و به طور کامل انجام دهید')
+    return redirect('/profile/logout')
+
+
+def profile_logout(request) :
+
+  try :
+     session_id = request.COOKIES.get('sessionid')
+     refresh_token = request.COOKIES.get('refresh')
+     access_token = request.COOKIES.get('access')
+
+     if session_id :
+           request.session.flush()
+           return redirect('/')
+     if not session_id and refresh_token:
+           user_tokens = OutstandingToken.objects.filter(user=request.user.id)
+           user_tokens.delete()
+           response = HttpResponseRedirect('/')
+           response.delete_cookie('refresh')
+           if access_token : response.delete_cookie('access')
+           return response
+
+
+     # if user didn't log in , it will be back to the home
+     return redirect('/')
+
+  except Exception as e :
+      messages.error(request, 'something went wrong')
+      return redirect(request.META['HTTP_REFERER'])
+
 
 def profile_completion_view(request) :
 
@@ -346,6 +381,8 @@ def about_us(request) :
 
 
 def shopping_cart(request) :
+
+  try :
     token = request.COOKIES.get('refresh')
     sessionID = request.COOKIES.get('sessionid')
     if token:
@@ -362,8 +399,14 @@ def shopping_cart(request) :
     except Exception as e :
         shopList = None
 
+    return render(request, 'cart.html', {'nav': nav, 'shopList': shopList, 'user': user})
 
-    return render(request,'cart.html' , {'nav' : nav , 'shopList' : shopList, 'user' : user })
+
+  except Exception as e :
+         messages.error(request, 'لطفا ابتدا ثبت نام کنید یا وارد شوید')
+         return redirect(request.META['HTTP_REFERER'])
+
+
 
 
 def create_address_error(request):

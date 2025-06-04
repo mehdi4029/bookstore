@@ -163,7 +163,7 @@ if(popUpErrorMessage !== undefined) {
    popUpErrorMessage.classList.add('error-active')
 setTimeout(()=>{
     popUpErrorMessage.classList.remove('error-active')
-},2000);
+},6000);
 }
 
 // displaying success message that django embeded in cookies
@@ -171,7 +171,7 @@ if(popUpSuccessMessage !== undefined) {
    popUpSuccessMessage.classList.add('success-active')
 setTimeout(()=>{
     popUpSuccessMessage.classList.remove('success-active')
-},2000);
+},6000);
 }
 
 
