@@ -7,6 +7,9 @@
     text-decoration: none;
     color : black ;
 }
+:root {
+  color-scheme: light only;
+}
 @font-face {
     font-family:"morabba-bold";
     src: url('Morabba-Bold.woff2');

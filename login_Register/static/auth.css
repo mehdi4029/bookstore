@@ -152,11 +152,6 @@
         background-color: #4B2E1E;
         cursor: pointer;
     }
-    #submit-arrow {
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-    }
 
     .login-with-social-media {
         width: 90%;
@@ -374,12 +369,6 @@
         font-size: 20px;
         margin-top: 30px;
         background-color: #4B2E1E;
-        cursor: pointer;
-    }
-
-    #submit-arrow {
-        width: 30px;
-        height: 30px;
         cursor: pointer;
     }
 

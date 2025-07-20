@@ -10,6 +10,9 @@ let obj ;
 let blurFilter = document.getElementById('filter')
 let loader = document.getElementsByClassName('loader')[0]
 
+url_params = new URLSearchParams(window.location.search)
+searchParam = url_params.get('next')
+
 
 // input[0] is a hidden input for csrf_token , the form data is stored in 1 and above indexes
 inputs = [...inputs]
@@ -92,7 +95,7 @@ let validationCheckTimer = ()=>{
                     if (seconds === 0) {
                          btn.innerText = 'ارسال دوباره کد تایید'
                          btn.addEventListener('click', (e) => {
-                              location.href = '/auth/retrieveCodeValidation'
+                              location.href = `/auth/retrieveCodeValidation?next=${searchParam}`
                          })
                          clearInterval(interval)
                     } else {
@@ -149,7 +152,7 @@ let checkTheCode = async searchParam => {
           location.href = data['path']
      }
      catch{
-          location.href = '/auth/retrieveCodeValidation'
+          location.href = `/auth/login`
      }
 }
 
@@ -193,8 +196,7 @@ setTimeout(()=>{
 }
 
 
-url_params = new URLSearchParams(window.location.search)
-searchParam = url_params.get('next')
+
 
 
 // ----------------------------------------------- event listeners ------------------------------------
@@ -245,7 +247,7 @@ submitBtn.addEventListener('click' , (e)=>{
       }
 })
 
-// 5
+5
 try{
 validationCheckSubmit.addEventListener('click' , (e)=>{
      checkTheCode(searchParam)

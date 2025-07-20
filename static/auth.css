@@ -6,6 +6,9 @@
     border: none;
     text-decoration: none ;
 }
+:root {
+  color-scheme: light only;
+}
 @font-face {
     font-family:"morabba-bold";
     src: url('/static/Morabba-Bold.woff2');

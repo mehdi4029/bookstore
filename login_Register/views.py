@@ -164,7 +164,7 @@ def checkCode_view(request):
               messages.error(request,'کد وارد شده منقضی شده است ، کد جدید برای شما ارسال شد')
               return Response({'success': False} , status=404)
     except Exception as e :
-        messages.error(request, f'   کد وارد شده معتبر نیست  {e} ')
+        messages.error(request, f'   کد وارد شده معتبر نیست   ')
         return Response({'success': False} , status=404)
 
 
@@ -255,7 +255,7 @@ def authentication(request , path) :
              send_message(phoneNumber, random_code)
              template = render_to_string('retrieveCodeValidation.html', request=request)
        except Exception as e :
-             messages.error(request,'درخواست به دلیل طولانی شدن پروسه منقضی شده ، مجددا امتحان فرمایید')
+             messages.error(request, f'   درخواست به دلیل طولانی شدن پروسه منقضی شده ، مجددا امتحان فرمایید')
              return redirect('/auth/login')
 
     if path == 'makeNewPassword' :

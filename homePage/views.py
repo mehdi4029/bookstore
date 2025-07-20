@@ -138,7 +138,6 @@ def get_books_by_filter(request,filter) :
               'price' : create_thousand_separator(book.price) ,
               'image-url' : book.image.url
           })
-     print(jsonReturn)
      return JsonResponse(jsonReturn,safe=False)
 
 def bookView(request,bookID) :
