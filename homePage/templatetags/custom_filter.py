@@ -23,7 +23,7 @@ def total_user_cost(user):
      price = 0
      for item in cartItems :
           price += item.book.price * item.count
-     return create_thousand_separator(price+40000)
+     return create_thousand_separator(price+50000)
 
 
 @register.filter

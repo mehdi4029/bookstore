@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'homePage.apps.HomepageConfig',
     'login_Register.apps.LoginRegisterConfig',
     'rest_framework' ,
+    'django_jalali',
     'rest_framework_simplejwt.token_blacklist',
     'django.contrib.sites',  # Required for allauth
     'allauth',

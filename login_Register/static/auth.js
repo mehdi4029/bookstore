@@ -235,7 +235,7 @@ submitBtn.addEventListener('click' , (e)=>{
       if(form.id === 'retrieve'){
            obj = {
                 'phoneNumber' : inputs[1].value ,
-                'username' : inputs[2].value ,
+                'uniqueMail' : inputs[2].value ,
            }
            retrieve(obj)
       }

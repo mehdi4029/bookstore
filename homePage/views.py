@@ -1,5 +1,5 @@
 from collections import OrderedDict
-
+from urllib.parse import unquote
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render,redirect
 from django.template.loader import render_to_string
@@ -7,6 +7,7 @@ from rest_framework.parsers import JSONParser
 from django.http import HttpResponseRedirect
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
 from homePage.models import *
+import requests
 from django.core.exceptions import ValidationError
 from urllib.parse import urlparse
 from django.core.paginator import Paginator
@@ -15,7 +16,14 @@ from django.contrib.sessions.models import Session
 from django.contrib import messages
 from django.core.mail import send_mail
 from BookStore import settings
+import json
 # Create your views here.
+
+ZARINPAL_MERCHANT_ID = '8403a284-7e70-45a0-b48d-9a3dc8c16e6d'
+ZARINPAL_REQUEST_URL = 'https://api.zarinpal.com/pg/v4/payment/request.json'
+ZARINPAL_STARTPAY_URL = 'https://www.zarinpal.com/pg/StartPay/{authority}'
+ZARINPAL_VERIFY_URL = 'https://api.zarinpal.com/pg/v4/payment/verify.json'
+
 
 def create_thousand_separator(price) :
     price = str(price)
@@ -57,7 +65,7 @@ def total_user_cost(user):
      price = 0
      for item in cartItems :
           price += item.book.price * item.count
-     return create_thousand_separator(price+40000)
+     return create_thousand_separator(price+50000)
 
 def total_user_books_price(user):
      cartItems = CartItem.objects.filter(user=user)
@@ -229,6 +237,10 @@ def addToCart(request,bookID) :
         return redirect(request.META['HTTP_REFERER'])
 
     book = Book.objects.get(id=bookID)
+    if (book.available_count == 0) :
+        messages.error(request, 'کتاب مورد نظر موجود نمیباشد')
+        return redirect(request.META['HTTP_REFERER'])
+
     try : query = CartItem.objects.filter(user=user)
     except CartItem.DoesNotExist: query = []
     for x in query :
@@ -295,10 +307,15 @@ def profile_view(request):
 
     favBooks = user.favBooks.all()
 
-    return render(request , 'user-profile.html' , {'nav' : nav , 'favBooks' : favBooks , 'user' : user})
+    orders = []
+
+    if Order.objects.filter(user=user).exists() :
+        orders = Order.objects.filter(user=user)
+
+    return render(request , 'user-profile.html' , {'nav' : nav , 'favBooks' : favBooks , 'user' : user , 'orders' : orders })
 
   except Exception as e :
-    messages.error(request, 'لطفا ابتدا ثبت نام خود را مجددا و به طور کامل انجام دهید')
+    messages.error(request, f'{e}لطفا ابتدا ثبت نام خود را مجددا و به طور کامل انجام دهید')
     return redirect('/profile/logout')
 
 
@@ -426,7 +443,7 @@ def remove_from_cart(request,bookId):
        removed_price = cartItem.book.price * cartItem.count
        price = total_user_books_price_in_digits(user)
        price = price - removed_price
-       total_cost = price + 40000
+       total_cost = price + 50000
        cartItem.delete()
        return JsonResponse({'all_books' : create_thousand_separator(price) , 'all_cost' : create_thousand_separator(total_cost)},status=200)
 
@@ -440,6 +457,11 @@ def insert_item_count(request) :
         user = request.user
     book = Book.objects.get(id=request.GET.get('id'))
     count = int(request.GET.get('count'))
+
+    if book.available_count < count :
+        messages.error(request, "موجودی کتاب از تعداد درخواستی کمتر میباشد")
+        return JsonResponse({'error' : 'موجودی کتاب کمتر از تعداد درخواست شده میباشد'} , status=404)
+
     cartItem = CartItem.objects.get(book=book,user=user)
     cartItem.count = count
     cartItem.save()
@@ -450,6 +472,129 @@ def insert_item_count(request) :
                               'all_cost' : total_user_cost(user)
                          },status=200)
 
+
+
+def checkoutBegin(request) :
+
+         try :
+            token = request.COOKIES.get('refresh')
+            sessionID = request.COOKIES.get('sessionid')
+            if token:
+                user_id = RefreshToken(token)['user_id']
+                user = MyUser.objects.get(id=user_id)
+            elif sessionID:
+                user = request.user
+
+            user_cart_items = CartItem.objects.filter(user=user)
+            amount = 0
+            for item in user_cart_items :
+                amount += (item.count * item.book.price)
+
+            callback_url = request.build_absolute_uri('/checkout/verify')
+            description = "payment for order"
+            data = {
+                "merchant_id": ZARINPAL_MERCHANT_ID,
+                "amount": amount * 10,  # Convert to Rials (1 Toman = 10 Rials)
+                "description": description,
+                "callback_url": callback_url,
+                "metadata": {
+                    "mobile": str(user.phoneNumber),
+                    "email": user.uniqueMail
+                }
+            }
+            response = requests.post(ZARINPAL_REQUEST_URL, json=data)
+            result = response.json()
+
+
+            if result.get('data', {}).get('code') == 100:
+                authority = result['data']['authority']
+                request.session['payment_amount'] = amount
+                request.session['payment_description'] = description
+                paymentURL = ZARINPAL_STARTPAY_URL.format(authority=authority)
+                return JsonResponse({'paymentURL' : paymentURL})
+            else:
+                print('request details : ' , result)
+                messages.error(request, 'اتصال از سمت درگاه منع شد')
+                return JsonResponse(status=400)
+
+
+         except Exception as e :
+             messages.error(request, 'اتصال به درگاه با مشکل مواجه شد')
+             return JsonResponse({'error' : str(e)},status=400)
+
+
+def checkoutVerify(request):
+
+                authority = request.GET.get('Authority')
+                status = request.GET.get('Status')
+
+                if status != 'OK':
+                    messages.error(request, 'تراکنش شما ناموفق بود')
+                    return redirect('/cart')
+
+                amount = request.session.get('payment_amount', 0)
+                description = request.session.get('payment_description', '')
+
+                if not authority or not amount:
+                    messages.error(request, 'تراکنش شما ناموفق بود')
+                    return redirect('/cart')
+
+                # Prepare verification data
+                data = {
+                    "merchant_id": ZARINPAL_MERCHANT_ID,
+                    "amount": amount * 10,  # Convert to Rials
+                    "authority": authority
+                }
+
+                try:
+                    response = requests.post(ZARINPAL_VERIFY_URL, json=data)
+                    result = response.json()
+
+                    if result.get('data', {}).get('code') == 100:
+                        # Payment was successful
+                        ref_id = result['data']['ref_id']
+
+                        token = request.COOKIES.get('refresh')
+                        sessionID = request.COOKIES.get('sessionid')
+                        if token:
+                            user_id = RefreshToken(token)['user_id']
+                            user = MyUser.objects.get(id=user_id)
+                        elif sessionID:
+                            user = request.user
+
+                        cookie_data = request.COOKIES.get('data')
+                        decoded_data = unquote(cookie_data)
+                        json_data = json.loads(decoded_data)
+                        address = json_data.get('address')
+                        username = json_data.get('username')
+                        phone_number = json_data.get('phoneNumber')
+
+                        order = Order(user=user, customerName=username, address=address, customerPhone=phone_number , is_paid=True, ref_id=ref_id)
+                        order.save()
+                        user_cart_items = CartItem.objects.filter(user=user)
+                        order_dict = {}
+                        totalPrice = 0
+                        for item in user_cart_items :
+                             order_dict[item.book.bookName] = item.count
+                             order.items.add(item.book)
+                             item.book.sell_count += item.count
+                             item.book.available_count = item.book.available_count - item.count
+                             item.book.save()
+                             totalPrice += (item.book.price * item.count)
+                             item.delete()
+                        order.counts = order_dict
+                        order.total_price = totalPrice
+                        order.save()
+                        messages.success(request, f'پرداخت با موفقیت انجام شد ، سابقه پرداختی ها از پروفایل کاربری قابل مشاهده است')
+                        return redirect('/cart')
+
+                    else:
+                        messages.error(request , 'عملیات پرداخت از سوی درگاه کامل انجام نشد')
+                        return redirect('/cart')
+
+                except Exception as e:
+                        messages.error(request, f'{e}عملیات پرداخت از طرف سایت کامل انجام نشد')
+                        return redirect('/cart')
 
 def create_order(request):
     token = request.COOKIES.get('refresh')
@@ -462,6 +607,6 @@ def create_order(request):
     data = JSONParser().parse(request)
     address = data['address']
     customerName = data['username']
-    order = Order(address=address, customerName=customerName, user=user)
+    order = Order.objects.get_or_create(customerName=customerName, address=address)
     order.save()
     return JsonResponse({'orderAddress' : order.address , 'orderCustomer' : order.customerName})

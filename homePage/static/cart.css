@@ -1255,7 +1255,7 @@ margin: auto;
 }
 #container > #deliveryInfo {
 width: 53%;
-height: 40%;
+height: 48%;
 margin-top: 20px;
 background-color: #FBF7F2;
 display: flex;
@@ -1291,7 +1291,7 @@ font-size: 14px;
 }
 .txtarea{
 width: 90%;
-height: 180px;
+height: 130px;
 padding: 0;
 padding: 10px;
 font-family: 'dana-medium';
@@ -1503,7 +1503,7 @@ height: 30px;
 }
 #container > #deliveryInfo {
     width: 53%;
-    height: 40%;
+    height: 48%;
     margin-top: 20px;
     background-color: #FBF7F2;
     display: flex;
@@ -1539,7 +1539,7 @@ height: 30px;
 }
 .txtarea{
     width: 90%;
-    height: 180px;
+    height: 130px;
     padding: 0;
     padding: 10px;
     font-family: 'dana-medium';

@@ -6,6 +6,7 @@ const orderAggregate = document.getElementById('order-aggregate')
 const pay = document.getElementById('goToPayment')
 const addressInput = document.getElementById('send-address')
 const nameInput = document.getElementById('send-username')
+const phoneNumberInput = document.getElementById('send-phoneNumber')
 let increaseBtns = document.getElementsByClassName('increase')
 let decreaseBtns = document.getElementsByClassName('decrease')
 let removeBtns = document.getElementsByClassName('remove')
@@ -41,8 +42,6 @@ increaseBtns.forEach(increaseBtn => {
      count = +e.target.parentElement.dataset.count
      book = e.target.parentElement.dataset.id
      count = count + 1
-     console.log(count)
-     console.log(e.target.nextElementSibling)
      response = await fetch(`/cart/count/?id=${book}&count=${count}` , {
        method : "PUT" , 
        headers : {
@@ -57,6 +56,9 @@ increaseBtns.forEach(increaseBtn => {
          e.target.parentElement.dataset.count = count
          e.target.nextElementSibling.innerText = String(count)
      }
+     else {
+         location.href = "/cart"
+     }
 })
 })
 
@@ -69,8 +71,6 @@ decreaseBtns.forEach(decreaseBtn => {
      if(count < 1){
        count = 1
      }
-     console.log(count)
-     console.log(e.target.previousElementSibling)
      response = await fetch(`/cart/count/?id=${book}&count=${count}` , {
        method : "PUT" , 
        headers : {
@@ -115,28 +115,37 @@ removeBtns.forEach(removeBtn => {
 pay.addEventListener('click' , async e=>{
     address = addressInput.value
     username = nameInput.value
-    if(address == ' ' || username == ''){
+    phoneNumber = phoneNumberInput.value
+    if(address == '' || username == ''){
         response = await fetch('/error/address')
         if(response.status < 400){
             location.href = '/cart'
         }
     }else {
-         response = await fetch('/order/create' , {
-            method : 'POST' , 
-            headers : {
-                "Content-Type" : "application/json" ,
-                'X-CSRFToken': getCookie('csrftoken'), // Required for Django
-            } ,
-            body : JSON.stringify({
-                'address' : address , 
-                'username' : username
-            })
-         })
-         if(response.status < 400){
-             data = await response.json()
-             console.log(data)
+         // Proper way to set the cookie
+        const jsonData = {address, username, phoneNumber};
+
+        // Convert to JSON and encode for cookie safety
+        const cookieValue = encodeURIComponent(JSON.stringify(jsonData));
+
+        // Set expiration to 12 minutes from now
+        const expirationMins = 12;
+        const date = new Date();
+        date.setTime(date.getTime() + (expirationMins * 60  * 1000));
+
+        // Set the cookie
+        document.cookie = `data=${cookieValue}; expires=${date.toUTCString()}; path=/`;
+
+         response = await fetch('/checkout/begin')
+         if(response.status >= 400){
+             window.location.href = "/cart"
          }
-    }   
+         else if(response.status < 290) {
+             data = await response.json()
+             path = data['paymentURL']
+             location.href = path
+         }
+    }
 })
 
 

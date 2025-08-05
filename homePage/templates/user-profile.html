@@ -114,12 +114,13 @@
                     </tr>
                </thead>
                <tbody>
+                  {% for order in orders %}
                     <tr class="order-row">
                          <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
+                              <p>{{ order.created_at }}</p>
                          </td>
                          <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
+                              <p>{{ order.total_price }}</p>
                          </td>
                          <td>
                                <p>تاییده شده</p>
@@ -130,166 +131,7 @@
                                </div>
                          </td >
                     </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
-                    <tr class="order-row">
-                         <td  class="date">
-                              <p>۱۹ خرداد ۱۴۰۴</p>
-                         </td>
-                         <td >
-                              <p>۲۴۸،۰۰۰ تومان</p>
-                         </td>
-                         <td>
-                               <p>تاییده شده</p>
-                         </td >
-                         <td>
-                               <div class="payment-status">
-                                    <p>پرداخت شده</p>
-                               </div>
-                         </td >
-                    </tr>
+                  {% endfor %}
                </tbody>
         </table>
 

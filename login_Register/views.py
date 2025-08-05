@@ -172,11 +172,11 @@ def checkCode_view(request):
 def retrieve_view(request) :
 
     data = JSONParser().parse(request)
-    username = data['username']
     phone_number = data['phoneNumber']
+    email = data['uniqueMail']
 
     try :
-        user = MyUser.objects.get(username=username)
+        user = MyUser.objects.get(uniqueMail = email)
         response = Response(status=200)
         response.set_cookie(key='flag' , value='True' , max_age=10*60 , httponly=True)
         response.set_cookie(key='temporary-data' , value=json.dumps({'username' : user.username , 'phoneNumber' : user.phoneNumber , 'mode' : 'ChangePass'}) , max_age=10*60, httponly=True)

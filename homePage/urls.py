@@ -20,6 +20,8 @@ urlpatterns = [
     path('cart/count/' , views.insert_item_count , name="insert_item_count" ),
     path('error/address' , views.create_address_error , name="create_address_error" ),
     path('order/create' , views.create_order , name="create_order" ),
+    path('checkout/begin' , views.checkoutBegin, name="checkoutBegin" ),
+    path('checkout/verify' , views.checkoutVerify, name="checkoutVerify" ),
     path('search/', views.get_search_result , name="get_search_result" ),
     path('getbook/<str:filter>' , views.get_books_by_filter , name="get_book_by_filter" ),
 ]
